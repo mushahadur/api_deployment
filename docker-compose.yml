@@ -1,0 +1,24 @@
+services:
+
+  laravel-docker:
+    container_name: api_deployment
+    build: .
+    volumes:
+      - ./api_deployment:/var/www/html
+    ports:
+      - 8000:80
+  
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api_deployment
+    ports:
+    - 3307:3307
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:   
+      - 8001:80
+    environment:
+      - PMA_ARBITRARY=1
